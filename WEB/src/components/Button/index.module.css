@@ -1,0 +1,40 @@
+.animatedButton {
+    position: relative;
+    overflow: hidden;
+    color: white;
+    background-color: #778375;
+    /* Cor primária padrão do Ant Design */
+    border: none;
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+    display: flex;
+    font-weight: bold;
+}
+
+.animatedButton:hover {
+    background-color: #778375;
+    transform: translateY(-2px);
+    /* Efeito de elevação ao passar o mouse */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.animatedButton .animatedBg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(45deg, #D1AE92, #778375);
+    /* Gradiente bonito */
+    transition: width 0.4s ease-in-out;
+    z-index: 1;
+}
+
+.animatedButton:hover .animatedBg {
+    width: 100%;
+}
+
+.animatedButton span {
+    position: relative;
+    z-index: 2;
+}
