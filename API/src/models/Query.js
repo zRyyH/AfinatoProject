@@ -21,16 +21,20 @@ const Query = sequelize.define('Query', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    title: {
+    client: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    description: {
         type: DataTypes.STRING,
         allowNull: false,
     },
     dateStart: {
-        type: DataTypes.STRING,
+        type: DataTypes.DATE,
         allowNull: false,
     },
     dateEnd: {
-        type: DataTypes.STRING,
+        type: DataTypes.DATE,
         allowNull: false,
     },
     status: {
@@ -42,8 +46,8 @@ const Query = sequelize.define('Query', {
         allowNull: false,
     }
 }, {
-    tableName: "querys",
-    timestamps: false
+    tableName: 'querys',
+    timestamps: true,     // Cria automaticamente createdAt e updatedAt
 });
 
 export default Query;

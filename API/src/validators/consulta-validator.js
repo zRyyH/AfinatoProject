@@ -12,14 +12,21 @@ const fields = {
         'any.required': `Row ID: ${ERROR_MESSAGES.REQUIRED}`,
         'string.base': `Row ID: ${ERROR_MESSAGES.STRING}`,
     }),
-    title: Joi.string().required().messages({
+    client: Joi.string().required().messages({
         'any.required': `Row ID: ${ERROR_MESSAGES.REQUIRED}`,
         'string.base': `Row ID: ${ERROR_MESSAGES.STRING}`,
     }),
-    type: Joi.string().required().messages({
+    description: Joi.string().required().messages({
         'any.required': `Row ID: ${ERROR_MESSAGES.REQUIRED}`,
         'string.base': `Row ID: ${ERROR_MESSAGES.STRING}`,
     }),
+    type: Joi.string()
+        .valid('Avaliação', 'Nutrição', 'Estética 1', 'Estética 2', 'Estética 3', 'Estética 4')
+        .required()
+        .messages({
+            'any.required': `Row ID: ${ERROR_MESSAGES.REQUIRED}`,
+            'string.base': `Row ID: ${ERROR_MESSAGES.STRING}`,
+        }),
     dateStart: Joi.string().required().messages({
         'any.required': `Descrição: ${ERROR_MESSAGES.REQUIRED}`,
         'string.base': `Descrição: ${ERROR_MESSAGES.STRING}`,
@@ -44,7 +51,8 @@ const fields = {
 // POST Consulta, payload para criar consulta.
 export const createConsultaSchema = Joi.object({
     clientId: fields.clientId,
-    title: fields.title,
+    client: fields.client,
+    description: fields.description,
     dateStart: fields.dateStart,
     dateEnd: fields.dateEnd,
     status: fields.status,
@@ -59,3 +67,8 @@ export const getAllConsultaSchema = Joi.object()
         "object.base": "O body não deve ser enviado na requisição.",
         "object.max": "O body não deve conter nenhuma propriedade.",
     });
+
+// DELETE Consultas, payload para obter todas as consultas.
+export const deleteConsultaSchema = Joi.required().messages({
+    'any.required': `Row ID: ${ERROR_MESSAGES.REQUIRED}`
+})

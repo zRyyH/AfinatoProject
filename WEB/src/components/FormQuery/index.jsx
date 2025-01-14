@@ -9,7 +9,7 @@ export default function FormQuery({ setTitle, setClientId, setDateStart, setDate
     const { clients } = useContext(CalendarContext);
 
     function changeTitle(event) {
-        setTitle(event.currentTarget.defaultValue);
+        setTitle(event.target.value);
     }
 
     function changeSelector(event) {

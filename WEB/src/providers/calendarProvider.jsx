@@ -21,10 +21,15 @@ export default function CalendarProvider() {
 
         if (success) {
             setQuerys(data.filter(e => e.type === typeCalendar).map(e => {
+                console.log(e)
                 return {
-                    title: e.title,
+                    title: e.client,
                     start: new Date(e.dateStart),
                     end: new Date(e.dateEnd),
+                    extendedProps: {
+                        description: e.description,
+                        type: e.type
+                    }
                 };
             }));
         } else {

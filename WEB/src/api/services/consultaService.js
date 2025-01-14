@@ -15,12 +15,11 @@ export const fetchConsultas = async (token) => {
 };
 
 
-// Busca lista de usuários
+// Cria uma nova consulta
 export const fetchCreateConsulta = async (token, payload) => {
     try {
         const headers = setAuthorizationHeader(token)
         const response = await api.post(endpoints.CONSULTA, payload, headers);
-        console.log();
         return response.data;
     } catch (error) {
         console.error('Erro ao buscar usuários:', error);
@@ -29,7 +28,21 @@ export const fetchCreateConsulta = async (token, payload) => {
 };
 
 
-// Busca lista de usuários
+// Deletar uma consulta
+export const fetchDeleteConsulta = async (token, payload) => {
+    try {
+        const headers = setAuthorizationHeader(token)
+        const response = await api.delete(endpoints.CONSULTA, payload, headers);
+        return response.data;
+
+    } catch (error) {
+        console.error('Erro ao deletar consulta:', error);
+        throw error;
+    }
+};
+
+
+// Obtem todas as consultas
 export const fetchAllConsultas = async (token) => {
     try {
         const response = await api.get(endpoints.ALL_CONSULTA, setAuthorizationHeader(token));

@@ -17,10 +17,12 @@
     "express": "^4.21.2",
     "google-auth-library": "^9.15.0",
     "helmet": "^8.0.0",
+    "http-proxy-middleware": "^3.0.3",
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
     "mysql2": "^3.11.5",
+    "puppeteer": "^24.0.0",
     "sequelize": "^6.37.5",
     "uuid": "^11.0.3"
   },

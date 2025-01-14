@@ -3,22 +3,24 @@ import useRequest from "../../hooks/useRequest";
 import { fetchCreateConsulta } from '../../api/services/consultaService';
 import { message, Modal } from "antd";
 import { CalendarContext } from "../../contexts/calendarContext";
+import LoadingIndicator from '../LoadingIndicator';
 import FormQuery from '../FormQuery';
 
 export default function ModalConsulta({ visible, setVisible }) {
-    const { request } = useRequest();
+    const { loading, request } = useRequest();
 
     const { typeCalendar, clients, fetchQuerys } = useContext(CalendarContext);
 
     const [clientId, setClientId] = useState('');
-    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
     const [dateStart, setDateStart] = useState(new Date());
     const [dateEnd, setDateEnd] = useState(new Date());
 
     async function ok() {
         const payload = {
             clientId,
-            title,
+            client: clients.filter(e => e['Row ID'] === clientId)[0].Nome,
+            description,
             dateStart,
             dateEnd,
             status: "Aberto",
@@ -45,13 +47,20 @@ export default function ModalConsulta({ visible, setVisible }) {
             onCancel={() => setVisible(false)}
             okText="Confirmar"
             cancelText="Cancelar"
+            okButtonProps={{ disabled: loading }}
+            cancelButtonProps={{ disabled: loading }}
         >
-            <FormQuery
-                clientes={clients}
-                setClientId={setClientId}
-                setDateEnd={setDateEnd}
-                setDateStart={setDateStart}
-                setTitle={setTitle} />
+            {
+                !loading ?
+                    <FormQuery
+                        clientes={clients}
+                        setClientId={setClientId}
+                        setDateEnd={setDateEnd}
+                        setDateStart={setDateStart}
+                        setTitle={setDescription} />
+                    :
+                    <LoadingIndicator />
+            }
         </Modal>
     );
 };

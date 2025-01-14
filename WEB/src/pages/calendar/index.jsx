@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { CalendarContext } from '../../contexts/calendarContext';
+import { AppContext } from '../../contexts/appContext';
 import useRequest from '../../hooks/useRequest';
-import { CalendarOutlined } from '@ant-design/icons';
+import { ApiFilled, CalendarOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import { motion } from "framer-motion";
 import HeaderComponent from '../../layout/Header'
@@ -21,6 +22,7 @@ const pageVariants = {
 export default function CalendarPage() {
     const { request } = useRequest();
     const { fetchClients, fetchQuerys, typeCalendar } = useContext(CalendarContext);
+    const { user } = useContext(AppContext);
     const [collapsed, setCollapsed] = useState(false);
 
     useEffect(() => {
@@ -34,6 +36,14 @@ export default function CalendarPage() {
             await fetchQuerys(request);
         })()
     }, [typeCalendar])
+
+    function menuBar(e) {
+        let key = e.key
+
+        if (key === '2') {
+            window.open(user.url, '_blank');
+        }
+    }
 
     return (
         <motion.div
@@ -51,9 +61,9 @@ export default function CalendarPage() {
                         }
                     </div>
 
-                    <Menu theme="light" defaultSelectedKeys={['1']} mode="inline">
-                        <Menu.Item key="1" icon={<CalendarOutlined />}>
-                            Calendario
+                    <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" onClick={menuBar} selectedKeys={{}} >
+                        <Menu.Item key="2" icon={<ApiFilled />} >
+                            AppSheet
                         </Menu.Item>
                     </Menu>
 

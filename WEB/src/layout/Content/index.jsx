@@ -4,6 +4,7 @@ import FullCalendar from '../../components/FullCalendar';
 import AnimatedButton from "../../components/Button";
 import ModalConsulta from '../../components/ModalConsulta';
 import Tabs from '../../components/Tabs';
+import ButtonPDF from '../../components/GeneratePdf'
 
 
 export default function Content() {
@@ -12,10 +13,9 @@ export default function Content() {
     return (
         <div className={styles.master} >
             <div className={styles.taskContainer} >
-                <div>
-                    <p>Minha Agenda</p><br></br>
-                    <AnimatedButton width={'225px'} text={'Adicionar Agendamento'} onClick={() => setVisible(true)} />
-                </div>
+                <p style={{ paddingBottom: '25px' }} >Minha Agenda</p>
+                <AnimatedButton width={'225px'} text={'Adicionar Agendamento'} onClick={() => setVisible(true)} />
+                <ButtonPDF title='Gerar PDF de consultas' />
             </div>
 
             <Tabs />

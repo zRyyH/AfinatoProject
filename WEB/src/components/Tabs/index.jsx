@@ -21,6 +21,12 @@ const MyTabs = () => {
             <TabPane tab="Estética 2" key="Estética 2">
                 {/* Conteúdo da aba Agenda */}
             </TabPane>
+            <TabPane tab="Estética 3" key="Estética 3">
+                {/* Conteúdo da aba Agenda */}
+            </TabPane>
+            <TabPane tab="Estética 4" key="Estética 4">
+                {/* Conteúdo da aba Agenda */}
+            </TabPane>
         </Tabs>
     );
 };

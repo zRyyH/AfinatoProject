@@ -20,8 +20,11 @@ export const authService = async (body) => {
         userId: user.dataValues.userId,
         name: user.dataValues.name,
         email: user.dataValues.email,
-        franchise: user.dataValues.franchise
+        franchise: user.dataValues.franchise,
+        url: user.dataValues.url
     };
+
+    console.log(payload)
 
     return { token: jwtSign(payload, user.dataValues.id), name: user.dataValues.name };
 };

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const appId = '4d6b1d71-9c1b-443c-a292-4c8452c8aa9f';
-const applicationAccessKey = 'V2-GKRtZ-nRU9q-6mG7X-ymEGT-1ugoM-hM7Kl-wTVkV-RLj4b';
+const appId = '789ddc9d-7dfc-4d80-b71f-3703a9fa5f3e';
+const applicationAccessKey = 'V2-tyq1Y-gybHq-sr3tg-WL8Ao-kdIcq-6u3ew-MNefh-P5W51';
 
 const headers = {
     'Content-Type': 'application/json',
@@ -9,8 +9,7 @@ const headers = {
 };
 
 const Properties = {
-    "Locale": "pt-BR",
-    "Timezone": "UTC"
+    "Locale": "pt-BR"
 };
 
 const request_api = async (action, table, row_params) => {
@@ -23,11 +22,16 @@ const request_api = async (action, table, row_params) => {
             "Rows": row_params
         };
 
-        const response = await axios.post(url, body, { headers });
+        try {
+            const response = await axios.post(url, body, { headers });
+    
+            if (!response.data) {
+                throw new Error('O servidor do AppSheet não respondeu.');
+            };
 
-        if (!response.data) {
-            throw new Error('O servidor do AppSheet não respondeu.');
-        };
+        } catch (e) {
+            console.log(e);
+        }
 
         return await axios.post(url, body, { headers });
 
