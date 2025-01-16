@@ -47,7 +47,7 @@ const Query = sequelize.define('Query', {
     }
 }, {
     tableName: 'querys',
-    timestamps: true,     // Cria automaticamente createdAt e updatedAt
+    timestamps: true,
 });
 
 export default Query;

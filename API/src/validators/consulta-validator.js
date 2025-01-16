@@ -71,4 +71,4 @@ export const getAllConsultaSchema = Joi.object()
 // DELETE Consultas, payload para obter todas as consultas.
 export const deleteConsultaSchema = Joi.required().messages({
     'any.required': `Row ID: ${ERROR_MESSAGES.REQUIRED}`
-})
+});

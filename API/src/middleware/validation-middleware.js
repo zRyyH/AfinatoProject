@@ -17,7 +17,7 @@ export const validationMiddleware = (schema, property = 'body') => {
 
                 return res.status(400).json({
                     success: false,
-                    message: 'Erro de validação',
+                    message: 'Formato de dados inválido',
                     errors,
                 });
             };
@@ -28,7 +28,7 @@ export const validationMiddleware = (schema, property = 'body') => {
         } catch (err) {
             return res.status(500).json({
                 success: false,
-                message: 'Erro interno do servidor',
+                message: 'Erro de validação',
                 details: err.message,
             });
         };

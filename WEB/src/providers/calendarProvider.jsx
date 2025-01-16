@@ -20,8 +20,7 @@ export default function CalendarProvider() {
         const { data, success, error } = await request(fetchAllConsultas);
 
         if (success) {
-            setQuerys(data.filter(e => e.type === typeCalendar).map(e => {
-                console.log(e)
+            setQuerys(data.map(e => {
                 return {
                     title: e.client,
                     start: new Date(e.dateStart),

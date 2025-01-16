@@ -33,12 +33,12 @@ app.use("/cliente", clienteRoutes);
 app.use("/consulta", consultaRoutes);
 
 // Middleware para Rotas Não Encontradas
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
     errorResponse(res, 'Rota não encontrada!', undefined, 404)
 });
 
 // Middleware Global de Erro
-app.use((err, req, res, next) => {
+app.use(async (err, req, res, next) => {
     errorResponse(res, err.message, err.stack)
 });
 

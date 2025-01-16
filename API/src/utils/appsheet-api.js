@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const appId = '789ddc9d-7dfc-4d80-b71f-3703a9fa5f3e';
-const applicationAccessKey = 'V2-tyq1Y-gybHq-sr3tg-WL8Ao-kdIcq-6u3ew-MNefh-P5W51';
+const appId = '4d6b1d71-9c1b-443c-a292-4c8452c8aa9f';
+const applicationAccessKey = 'V2-GKRtZ-nRU9q-6mG7X-ymEGT-1ugoM-hM7Kl-wTVkV-RLj4b';
 
 const headers = {
     'Content-Type': 'application/json',
@@ -22,21 +22,17 @@ const request_api = async (action, table, row_params) => {
             "Rows": row_params
         };
 
-        try {
-            const response = await axios.post(url, body, { headers });
-    
-            if (!response.data) {
-                throw new Error('O servidor do AppSheet não respondeu.');
-            };
+        const response = await axios.post(url, body, { headers });
 
-        } catch (e) {
-            console.log(e);
-        }
+        if (response.data) {
+            return response;
 
-        return await axios.post(url, body, { headers });
+        } else {
+            throw new Error('O servidor do AppSheet não respondeu.');
+        };
 
     } catch (err) {
-        throw err;
+        throw new Error('O servidor do AppSheet não respondeu.');
     };
 };
 

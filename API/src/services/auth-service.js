@@ -14,7 +14,7 @@ export const authService = async (body) => {
 
     if (!user) {
         throw new Error('Não autorizado!');
-    }
+    };
 
     const payload = {
         userId: user.dataValues.userId,
@@ -23,8 +23,6 @@ export const authService = async (body) => {
         franchise: user.dataValues.franchise,
         url: user.dataValues.url
     };
-
-    console.log(payload)
 
     return { token: jwtSign(payload, user.dataValues.id), name: user.dataValues.name };
 };

@@ -6,11 +6,10 @@ import Logo from '../Logo';
 import styles from './index.module.css';
 import useRequest from "../../hooks/useRequest";
 import { fetchAuth } from '../../api/services/authService';
-import { message } from "antd";
 
 
 const LoginComponent = () => {
-    const { loading, request } = useRequest(false);
+    const { request } = useRequest(false);
     const { setAuth, setToken } = useContext(AppContext);
 
     async function login(values) {
@@ -20,9 +19,6 @@ const LoginComponent = () => {
         if (success) {
             setAuth(true);
             setToken(data.data.token);
-            message.success("Autenticado com sucesso!");
-        } else {
-            message.error("Usuário ou senha inválidos!");
         }
     };
 

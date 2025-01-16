@@ -8,26 +8,26 @@ const useLogin = () => {
     const [isAuth, setAuth] = useState(false);
     const [user, setUser] = useState('');
 
-
     async function checkToken() {
         try {
             if (token !== null) {
-                const { status, data } = await request(fetchHealthCheck, token)
-                if (status === 200) {
+                const { success, data } = await request(fetchHealthCheck, token);
+                if (success) {
                     localStorage.setItem('token', token);
-                    setUser(data.data)
+                    setUser(data.data);
                     setAuth(true);
                     return;
                 }
             }
         } catch (err) {
-            console.log('Erro ao validar token!')
-            alert(err)
+            setAuth(false);
+            setToken(null);
+            localStorage.removeItem('token');
         }
     }
 
     useEffect(() => {
-        checkToken()
+        checkToken();
     }, [token]);
 
     return { user, token, setToken, isAuth, setAuth };

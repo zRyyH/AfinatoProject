@@ -17,7 +17,7 @@ const ButtonPDF = ({ title }) => {
             const title = e.title;
             const type = e.extendedProps.type;
             const profissional = user.name;
-            
+
             const configData2 = { hour: '2-digit', minute: '2-digit', hour12: false };
 
             const start = dataStart.toLocaleTimeString('pt-BR', configData2);
@@ -35,7 +35,11 @@ const ButtonPDF = ({ title }) => {
             } else {
                 return []
             }
-        }).filter(e => e.length > 0);
+        }).filter(e => e.length > 0).sort((a, b) => {
+            return a[0].localeCompare(b[0]);
+        });
+
+        console.log(linhas);
 
         if (generatePdf(linhas)) {
             message.success('PDF gerado com sucesso!');

@@ -10,7 +10,7 @@ export default function SelectComponent({ list, label, name, onChange, message =
         <Form.Item
             label={label}
             name={name}
-            rules={[{ required: required, message: message }]} // Regras de validação
+            rules={[{ required: required, message: message }]}
         >
             <Select
                 showSearch
@@ -22,7 +22,7 @@ export default function SelectComponent({ list, label, name, onChange, message =
             >
                 {list.map(item => {
                     return (
-                        <Option value={item[valueId]}>
+                        <Option value={item[valueId]} key={item[valueId]} >
                             <UserOutlined style={style} />
                             {item[valueName]}
                         </Option>

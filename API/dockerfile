@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Etapa 6: Expor a porta usada pela API (alterar se necessário)
-EXPOSE 3000
+EXPOSE 5000
 
 # Etapa 7: Definir o comando de inicialização
 CMD ["npm", "start"]

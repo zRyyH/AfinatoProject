@@ -13,8 +13,6 @@ export default function HeaderComponent() {
         localStorage.removeItem('token')
     }
 
-    console.log(user)
-
     return (
         <div className={styles.master} >
             <div className={styles.pathContainer} >

@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import { fetchAuth, fetchGoogleAuth } from '../api/services/authService';
 import { AppContext } from '../contexts/appContext';
 import useRequest from './useRequest';
-
+import { message } from 'antd';
 
 const useAuth = () => {
     const [payload, setPayload] = useState(null);
@@ -33,7 +33,7 @@ const useAuth = () => {
 
             return true;
         } catch (err) {
-            console.log('Erro ao autenticar usuario!')
+            message.error("Erro ao logar usuario!")
             throw err;
         }
     };

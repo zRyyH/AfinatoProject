@@ -1,7 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useCallback } from "react";
 import useRequest from "../../hooks/useRequest";
 import { fetchCreateConsulta } from '../../api/services/consultaService';
-import { message, Modal } from "antd";
+import { Modal } from "antd";
 import { CalendarContext } from "../../contexts/calendarContext";
 import LoadingIndicator from '../LoadingIndicator';
 import FormQuery from '../FormQuery';
@@ -9,12 +9,18 @@ import FormQuery from '../FormQuery';
 export default function ModalConsulta({ visible, setVisible }) {
     const { loading, request } = useRequest();
 
-    const { typeCalendar, clients, fetchQuerys } = useContext(CalendarContext);
+    const { typeCalendar, clients, fetchQuerys, fetchClients } = useContext(CalendarContext);
 
     const [clientId, setClientId] = useState('');
     const [description, setDescription] = useState('');
     const [dateStart, setDateStart] = useState(new Date());
     const [dateEnd, setDateEnd] = useState(new Date());
+
+    useEffect(() => {
+        if (visible === true) {
+            (async () => await fetchClients(request))()
+        }
+    }, [visible])
 
     async function ok() {
         const payload = {
@@ -27,15 +33,11 @@ export default function ModalConsulta({ visible, setVisible }) {
             type: typeCalendar
         }
 
-        const { success, error } = await request(fetchCreateConsulta, payload);
+        const { success } = await request(fetchCreateConsulta, payload);
 
         if (success) {
-            message.success('Consulta agendada com sucesso!');
             await fetchQuerys(request);
-        } else {
-            message.error(error);
         }
-
         setVisible(false);
     }
 

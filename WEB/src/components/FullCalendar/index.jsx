@@ -1,15 +1,16 @@
 import React, { useContext, useEffect } from "react";
+import useRequest from "../../hooks/useRequest";
+import { CalendarContext } from "../../contexts/calendarContext";
 import { Calendar, momentLocalizer } from "react-big-calendar";
+import { AppContext } from "../../contexts/appContext";
+
 import LoadingIndicator from '../LoadingIndicator'
 import styles from './index.module.css';
 import ModalConsulta from "../ModalConsulta";
-import { CalendarContext } from "../../contexts/calendarContext";
 
 import moment from "moment";
 import "moment/locale/pt-br";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import useRequest from "../../hooks/useRequest";
-import { AppContext } from "../../contexts/appContext";
 
 const localizer = momentLocalizer(moment);
 moment.locale("pt-br");
@@ -57,7 +58,6 @@ const MyCalendar = () => {
         (async () => await fetchQuerys(request))()
     }, [typeCalendar])
 
-
     return (
         <div className={styles.calendarContainer}>
             {
@@ -65,8 +65,8 @@ const MyCalendar = () => {
                     <Calendar
                         messages={messages}
                         localizer={localizer}
-                        events={querys}
-                        onSelectEvent={(e) => console.log(e)}
+                        events={querys.filter(e => e.extendedProps.type === typeCalendar)}
+                        onSelectEvent={(e) => { }}
                         startAccessor="start"
                         endAccessor="end"
                         selectable
