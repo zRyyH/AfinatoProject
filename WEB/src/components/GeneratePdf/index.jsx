@@ -49,7 +49,7 @@ const ButtonPDF = ({ title }) => {
     }
 
     return (
-        <AnimatedButton width={'225px'} onClick={handleGenerate} text={title}></AnimatedButton>
+        <AnimatedButton width={'175px'} onClick={handleGenerate} text={title}></AnimatedButton>
     );
 };
 

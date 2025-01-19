@@ -15,7 +15,7 @@ const MyTabs = () => {
     const { setTypeCalendar } = useContext(CalendarContext);
 
     return (
-        <Tabs defaultActiveKey="1" centered onChange={setTypeCalendar} items={items} />
+        <Tabs defaultActiveKey="1" centered onChange={setTypeCalendar} items={items} tabPosition="bottom" />
     );
 };
 

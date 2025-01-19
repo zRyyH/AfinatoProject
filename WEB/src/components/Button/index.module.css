@@ -7,6 +7,9 @@
     border: none;
     transition: all 0.3s ease-in-out;
     width: 100%;
+    min-height: 32.5px;
+    align-items: center;
+    justify-content: center;
     display: flex;
     font-weight: bold;
 }

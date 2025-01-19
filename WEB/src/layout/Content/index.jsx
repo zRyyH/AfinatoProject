@@ -13,13 +13,19 @@ export default function Content() {
     return (
         <div className={styles.master} >
             <div className={styles.taskContainer} >
-                <p style={{ paddingBottom: '25px' }} >Minha Agenda</p>
-                <AnimatedButton width={'225px'} text={'Adicionar Agendamento'} onClick={() => setVisible(true)} />
-                <ButtonPDF title='Gerar PDF de consultas' />
+                <p style={{ padding: '20px' }} >Minha Agenda</p>
+                <AnimatedButton width={'175px'} text={'Adicionar consulta'} onClick={() => setVisible(true)} />
+                <ButtonPDF title='Gerar PDF' />
             </div>
 
-            <Tabs />
-            <FullCalendar />
+            <div className={styles.calendarContainer} >
+                <div className={styles.tabsContainer} >
+                    <Tabs />
+                </div>
+                <div className={styles.subCalendarContainer} >
+                    <FullCalendar />
+                </div>
+            </div>
 
             <ModalConsulta visible={visible} setVisible={setVisible} />
         </div >

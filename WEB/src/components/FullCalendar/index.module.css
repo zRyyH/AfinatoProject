@@ -1,14 +1,7 @@
 .calendarContainer {
-    height: 550px;
-    min-height: 400px;
-    width: 750px;
-    min-width: 650px;
     border: 1px solid #ccc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 60px;
-    padding-bottom: 60px;
-    border-radius: 5px;
+    width: min(90vw, 90vh);
+    height: min(60vw, 60vh);
+    padding: 25px;
     background-color: #fafafa;
 }
