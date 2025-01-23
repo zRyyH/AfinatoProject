@@ -1,8 +1,9 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import useRequest from "../../hooks/useRequest";
 import { CalendarContext } from "../../contexts/calendarContext";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import { AppContext } from "../../contexts/appContext";
+import ModalEdit from "../../components/ModalEdit"
 
 import LoadingIndicator from '../LoadingIndicator'
 import styles from './index.module.css';
@@ -38,7 +39,7 @@ const renderAgendaEvent = (query, user) => {
     const { event, title } = query
 
     return (
-        <div>
+        <div style={{ backgroundColor: '#f3f3f3', padding: '10px', borderRadius: '5px', color: 'black' }} >
             <strong>{title}</strong> {/* Título do evento */}
             <br />
             <span>Profissional: {user.name}</span> {/* Nome do cliente */}
@@ -50,6 +51,9 @@ const renderAgendaEvent = (query, user) => {
 
 
 const MyCalendar = () => {
+    const [event, setEvent] = useState(null);
+    const [visible, setVisible] = useState(false);
+    const [currentView, setCurrentView] = useState("month");
     const { user } = useContext(AppContext);
     const { querys, fetchQuerys, typeCalendar } = useContext(CalendarContext);
     const { loading, request } = useRequest();
@@ -57,6 +61,10 @@ const MyCalendar = () => {
     useEffect(() => {
         (async () => await fetchQuerys(request))()
     }, [typeCalendar])
+
+
+
+    console.log(querys);
 
     return (
         <div className={styles.calendarContainer}>
@@ -66,9 +74,10 @@ const MyCalendar = () => {
                         messages={messages}
                         localizer={localizer}
                         events={querys.filter(e => e.extendedProps.type === typeCalendar)}
-                        onSelectEvent={(e) => { }}
+                        onSelectEvent={(e) => (setEvent(e), setVisible(true))}
                         startAccessor="start"
                         endAccessor="end"
+                        onView={(view) => setCurrentView(view)}
                         selectable
                         defaultView="month"
                         views={["month", "week", "day", "agenda"]}
@@ -77,10 +86,29 @@ const MyCalendar = () => {
                                 event: (e) => renderAgendaEvent(e, user),
                             },
                         }}
+                        eventPropGetter={(event) => {
+                            if (currentView !== "agenda") {
+                                let backgroundColor = 'white';
+                                switch (event.extendedProps.status) {
+                                    case 'Aberto':
+                                        backgroundColor = 'rgb(13, 160, 0)';
+                                        break
+
+                                    case 'Cancelado':
+                                        backgroundColor = 'rgb(156, 0, 0)';
+                                        break
+
+                                    case 'Atendido':
+                                        backgroundColor = 'rgb(167, 150, 0)';
+                                        break
+                                }
+                                return { style: { backgroundColor } };
+                            }
+                        }}
                     />
             }
 
-            <ModalConsulta />
+            <ModalEdit setVisible={setVisible} visible={visible} query={event} />
         </div>
     );
 };

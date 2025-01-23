@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useCallback } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import useRequest from "../../hooks/useRequest";
 import { fetchCreateConsulta } from '../../api/services/consultaService';
 import { Modal } from "antd";

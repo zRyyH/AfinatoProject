@@ -21,7 +21,9 @@ export const authService = async (body) => {
         name: user.dataValues.name,
         email: user.dataValues.email,
         franchise: user.dataValues.franchise,
-        url: user.dataValues.url
+        url: user.dataValues.url,
+        appId: user.dataValues.appId,
+        accessKey: user.dataValues.accessKey
     };
 
     return { token: jwtSign(payload, user.dataValues.id), name: user.dataValues.name };

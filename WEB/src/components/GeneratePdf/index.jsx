@@ -16,6 +16,7 @@ const ButtonPDF = ({ title }) => {
             const dataEnd = new Date(e.end);
             const title = e.title;
             const type = e.extendedProps.type;
+            const status = e.extendedProps.status;
             const profissional = user.name;
 
             const configData2 = { hour: '2-digit', minute: '2-digit', hour12: false };
@@ -28,7 +29,8 @@ const ButtonPDF = ({ title }) => {
                     `${start} as ${end}`,
                     title,
                     profissional,
-                    type
+                    type,
+                    status
                 ]
 
                 return payload

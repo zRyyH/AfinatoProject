@@ -18,11 +18,6 @@ const useRequest = (protected_route = true) => {
                 data: response.data
             };
 
-            const log = response.message
-
-            if (log) message.success(log);
-            console.log(response);
-
             return payload;
 
         } catch (err) {

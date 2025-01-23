@@ -33,6 +33,14 @@ const User = sequelize.define('User', {
     url: {
         type: DataTypes.STRING,
         allowNull: false,
+    },
+    appId: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    accessKey: {
+        type: DataTypes.STRING,
+        allowNull: false,
     }
 }, {
     tableName: "users",

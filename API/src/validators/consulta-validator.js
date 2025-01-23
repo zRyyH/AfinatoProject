@@ -2,62 +2,46 @@ import Joi from 'joi';
 
 const ERROR_MESSAGES = {
     REQUIRED: 'Este campo é obrigatório.',
-    STRING: 'Deve ser uma string válida.',
-    DATE: 'Deve ser uma data válida no formato YYYY-MM-DD.',
-    STATUS: 'Status inválido. Deve ser "ativo" ou "inativo".',
+    STRING: 'Deve ser uma string válida.'
+};
+
+const ERROR_STRING = {
+    'any.required': `Row ID: ${ERROR_MESSAGES.REQUIRED}`,
+    'string.base': `Row ID: ${ERROR_MESSAGES.STRING}`
 };
 
 const fields = {
-    clientId: Joi.string().required().messages({
-        'any.required': `Row ID: ${ERROR_MESSAGES.REQUIRED}`,
-        'string.base': `Row ID: ${ERROR_MESSAGES.STRING}`,
-    }),
-    client: Joi.string().required().messages({
-        'any.required': `Row ID: ${ERROR_MESSAGES.REQUIRED}`,
-        'string.base': `Row ID: ${ERROR_MESSAGES.STRING}`,
-    }),
-    description: Joi.string().required().messages({
-        'any.required': `Row ID: ${ERROR_MESSAGES.REQUIRED}`,
-        'string.base': `Row ID: ${ERROR_MESSAGES.STRING}`,
-    }),
-    type: Joi.string()
-        .valid('Avaliação', 'Nutrição', 'Estética 1', 'Estética 2', 'Estética 3', 'Estética 4')
-        .required()
-        .messages({
-            'any.required': `Row ID: ${ERROR_MESSAGES.REQUIRED}`,
-            'string.base': `Row ID: ${ERROR_MESSAGES.STRING}`,
-        }),
-    dateStart: Joi.string().required().messages({
-        'any.required': `Descrição: ${ERROR_MESSAGES.REQUIRED}`,
-        'string.base': `Descrição: ${ERROR_MESSAGES.STRING}`,
-    }),
-    dateEnd: Joi.string().required().messages({
-        'any.required': `User ID: ${ERROR_MESSAGES.REQUIRED}`,
-        'string.base': `User ID: ${ERROR_MESSAGES.STRING}`,
-    }),
-    status: Joi.string()
-        .valid('Aberto', 'Atendido', 'Cancelado')
-        .required()
-        .messages({
-            'any.required': `Status: ${ERROR_MESSAGES.REQUIRED}`,
-            'any.only': ERROR_MESSAGES.STATUS,
-        }),
-    clientId: Joi.string().required().messages({
-        'any.required': `Cliente: ${ERROR_MESSAGES.REQUIRED}`,
-        'string.base': `Cliente: ${ERROR_MESSAGES.STRING}`,
-    }),
+    queryId: Joi.string().messages(ERROR_STRING),
+    clientId: Joi.string().messages(ERROR_STRING),
+    client: Joi.string().messages(ERROR_STRING),
+    description: Joi.string().messages(ERROR_STRING),
+    type: Joi.string().valid('Avaliação', 'Nutrição', 'Estética 1', 'Estética 2', 'Estética 3', 'Estética 4').messages(ERROR_STRING),
+    dateStart: Joi.string().messages(ERROR_STRING),
+    dateEnd: Joi.string().messages(ERROR_STRING),
+    status: Joi.string().valid('Aberto', 'Atendido', 'Cancelado').messages(ERROR_STRING)
 };
 
 // POST Consulta, payload para criar consulta.
 export const createConsultaSchema = Joi.object({
-    clientId: fields.clientId,
-    client: fields.client,
-    description: fields.description,
-    dateStart: fields.dateStart,
-    dateEnd: fields.dateEnd,
-    status: fields.status,
-    clientId: fields.clientId,
-    type: fields.type
+    clientId: fields.clientId.required(),
+    client: fields.client.required(),
+    description: fields.description.required(),
+    dateStart: fields.dateStart.required(),
+    dateEnd: fields.dateEnd.required(),
+    status: fields.status.required(),
+    type: fields.type.required()
+});
+
+// EDIT Consulta, payload para criar consulta.
+export const editConsultaSchema = Joi.object({
+    queryId: fields.queryId.optional(),
+    clientId: fields.clientId.optional(),
+    client: fields.client.optional(),
+    description: fields.description.optional(),
+    dateStart: fields.dateStart.optional(),
+    dateEnd: fields.dateEnd.optional(),
+    status: fields.status.optional(),
+    type: fields.type.optional()
 });
 
 // GET Consultas, payload para obter todas as consultas.
@@ -68,7 +52,7 @@ export const getAllConsultaSchema = Joi.object()
         "object.max": "O body não deve conter nenhuma propriedade.",
     });
 
-// DELETE Consultas, payload para obter todas as consultas.
-export const deleteConsultaSchema = Joi.required().messages({
-    'any.required': `Row ID: ${ERROR_MESSAGES.REQUIRED}`
+// DELETE Consulta, payload para criar consulta.
+export const deleteConsultaSchema = Joi.object({
+    queryId: fields.queryId.optional()
 });

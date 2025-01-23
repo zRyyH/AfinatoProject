@@ -1,8 +1,8 @@
 .master {
     display: flex;
     width: 100%;
-    height: 60px;
-    min-height: 60px;
+    height: 50px;
+    min-height: 50px;
     flex-direction: row;
     background-color: #778375;
     align-items: center;

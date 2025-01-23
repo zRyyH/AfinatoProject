@@ -34,7 +34,7 @@ export function generatePdf(linhas) {
             doc.addImage(base64, 'PNG', 85, 7, 40, 19);
 
             // Define as colunas e as linhas da tabela
-            const colunas = ['Hora', 'Cliente', 'Profissional', 'Sala'];
+            const colunas = ['Hora', 'Cliente', 'Profissional', 'Sala', 'Status'];
 
             // Adiciona a tabela ao PDF
             doc.autoTable({

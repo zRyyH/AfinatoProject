@@ -27,7 +27,9 @@ export default function CalendarProvider() {
                     end: new Date(e.dateEnd),
                     extendedProps: {
                         description: e.description,
-                        type: e.type
+                        type: e.type,
+                        status: e.status,
+                        queryId: e.queryId
                     }
                 };
             }));
