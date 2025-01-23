@@ -2,7 +2,6 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import image from '../midia/logoAuth.png';
 
-
 const carregarImagemComoBase64 = (src, callback) => {
     const img = new Image();
     img.crossOrigin = 'Anonymous'; // Necessário para evitar problemas com CORS
@@ -58,7 +57,6 @@ export function generatePdf(linhas) {
             // Adiciona a data no rodapé, no centro da página
             doc.setFontSize(10);
             doc.text(`Gerado em: ${dataFormatada}`, doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
-
 
             // Salva o PDF
             doc.save(`consultas-${dia}/${mes}/${ano}.pdf`);

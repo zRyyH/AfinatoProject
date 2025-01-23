@@ -1,7 +1,7 @@
 import { Radio } from 'antd';
 import React, { useState, useContext } from "react";
 import useRequest from "../../hooks/useRequest";
-import { fetchEditConsulta, fetchDeleteConsulta } from '../../api/services/consultaService';
+import { fetchEditConsulta } from '../../api/services/consultaService';
 import { Modal } from "antd";
 import { CalendarContext } from "../../contexts/calendarContext";
 import LoadingIndicator from '../LoadingIndicator';
@@ -14,7 +14,6 @@ export default function ModalEdit({ visible, setVisible, query }) {
 
     async function ok() {
         const { queryId } = query.extendedProps
-        console.log({ status, queryId })
         const { success } = await request(fetchEditConsulta, { status, queryId });
         if (success) await fetchQuerys(request);
         setVisible(false);

@@ -7,7 +7,6 @@ import ModalEdit from "../../components/ModalEdit"
 
 import LoadingIndicator from '../LoadingIndicator'
 import styles from './index.module.css';
-import ModalConsulta from "../ModalConsulta";
 
 import moment from "moment";
 import "moment/locale/pt-br";

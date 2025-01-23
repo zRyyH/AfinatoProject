@@ -4,11 +4,9 @@ import { message } from "antd";
 
 import { fetchAllConsultas } from '../api/services/consultaService';
 import { fetchClientes } from '../api/services/clienteService';
-
 import { CalendarContext } from '../contexts/calendarContext';
 
 import CalendarPage from '../pages/calendar';
-
 
 
 export default function CalendarProvider() {
