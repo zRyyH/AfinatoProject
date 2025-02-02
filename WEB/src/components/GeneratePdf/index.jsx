@@ -6,9 +6,25 @@ import { AppContext } from '../../contexts/appContext';
 import { generatePdf } from '../../utils/generate-pdf';
 
 
-const ButtonPDF = ({ title }) => {
+const ButtonPDF = ({ title, periodo }) => {
     const { querys } = useContext(CalendarContext);
     const { user } = useContext(AppContext);
+
+    function formatarData(data) {
+        // Extrair componentes
+        const dia = String(data.getDate()).padStart(2, '0');
+        const mes = String(data.getMonth() + 1).padStart(2, '0'); // Meses começam do 0
+        const ano = data.getFullYear();
+
+        // Formatar para 00:00
+        const horas = '00';
+        const minutos = '00';
+
+        // Montar string final
+        const dataFormatada = `${dia}/${mes}/${ano} ${data.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', hour12: false })}`;
+
+        return dataFormatada;
+    }
 
     function handleGenerate() {
         const linhas = querys.map(e => {
@@ -24,19 +40,41 @@ const ButtonPDF = ({ title }) => {
             const start = dataStart.toLocaleTimeString('pt-BR', configData2);
             const end = dataEnd.toLocaleTimeString('pt-BR', configData2);
 
-            if (dataStart.getDate() === new Date().getDate()) {
-                const payload = [
-                    `${start} as ${end}`,
-                    title,
-                    profissional,
-                    type,
-                    status
-                ]
+            if (periodo === 'DIA') {
+                const isPeriodo = dataStart.getDate() === new Date().getDate()
 
-                return payload
+                if (isPeriodo) {
+                    const payload = [
+                        `${formatarData(dataStart)} - ${formatarData(dataEnd)}`,
+                        title,
+                        profissional,
+                        type,
+                        status
+                    ]
+
+                    return payload
+                } else {
+                    return []
+                }
+
             } else {
-                return []
+                const isPeriodo = dataStart.getMonth() === new Date().getMonth()
+
+                if (isPeriodo) {
+                    const payload = [
+                        `${formatarData(dataStart)} - ${end}`,
+                        title,
+                        profissional,
+                        type,
+                        status
+                    ]
+
+                    return payload
+                } else {
+                    return []
+                }
             }
+
         }).filter(e => e.length > 0).sort((a, b) => {
             return a[0].localeCompare(b[0]);
         });
@@ -51,7 +89,7 @@ const ButtonPDF = ({ title }) => {
     }
 
     return (
-        <AnimatedButton width={'175px'} onClick={handleGenerate} text={title}></AnimatedButton>
+        <AnimatedButton width={'185px'} onClick={handleGenerate} text={title}></AnimatedButton>
     );
 };
 
